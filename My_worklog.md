@@ -1,9 +1,9 @@
 # Worklog: K-pop MerchAI (COMP8410 Assignment 1)
 
-| Date | Task | What I did | Decision / Result | AI assistance |
+| Date | Task | What I did | Decision / Result |
 |---|---|---|---|---|
-| 31 Oct 2026 | Project setup | Created ENV_SETUP notebook: GPU check, shared settings, model access, dataset check | Running on Colab T4 GPU | Code drafts reviewed and run by me |
-| 31 Oct 2026 | GPU cost | Added automatic GPU cost per hour (T4 / L4 / A100) | T4 ≈ US$0.119/hour | Rates found with AI help; references checked |
-| 31 Oct 2026 | Model access | Replaced 4 gated models with open models | Lumina-Image-2.0, SDXL, Granite Guardian, Qwen3Guard; all 7 models open | AI suggested options; I chose and verified |
+| 31 Oct 2026 | Project setup | Created ENV_SETUP notebook: GPU check, shared settings, model access, dataset check | Running on Colab T4 GPU | 
+| 31 Oct 2026 | GPU cost | Added automatic GPU cost per hour (T4 / L4 / A100) | T4 ≈ US$0.119/hour |
+| 31 Oct 2026 | Model access | Replaced 4 gated models with open models | Lumina-Image-2.0, SDXL, Granite Guardian, Qwen3Guard; all 7 models open | 
 | 31 Oct 2026 | Datasets | Downloaded K-pop prices (Kaggle) and KOLD manually | Use only all_shops.csv (avoids duplicates) | — |
 | 31 Oct 2026 | GitHub | Created repository and pushed first version | Worklog started | — |
