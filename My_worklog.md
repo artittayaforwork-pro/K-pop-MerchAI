@@ -2,4 +2,5 @@
 
 | Date | Task | What I did | Decision / Result |
 |---|---|---|---|
+| 31 Oct 2026 | Notebook for checking environment & dataset | Setup Environment , test model token and decide , design function cover business thinking, data preparation | Running on Colab T4 GPU |
 | 1 Nov 2026 | Notebook 1 - Trend Analysis | Setup Environment , specialize function, design dictionary of each languages until complete final result in conclusion | Running on Colab T4 GPU | 
