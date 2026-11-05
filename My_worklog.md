@@ -9,4 +9,5 @@
 | 4 Nov 2026 | Design Concept documents | Upload first design concept document while adjusting some prompt in Notebook2 to be align with Notebook1 result. Furthermore, impoving code with GPU update for task after my evaluation| Running on Colab T4, A100, L4 GPU | 
 | 4 Nov 2026 | Live Demo Record | Demo Record for Notebook 1 - 2 | Running on Colab A100 & L4 GPU | 
 | 5 Nov 2026 | Notebook 3 - Global Pricing | U Setup Environment , specialize function, design dictionary of each languages until complete final result in conclusion & Live demo | Running on Colab L4 GPU | 
-
+| 6 Nov 2026 | Notebook 4 - Comment Moderation | U Setup Environment , specialize function, design dictionary of each languages until complete final result in conclusion & Live demo | Running on Colab L4 GPU | 
+| 6 Nov 2026 | Demo VDO | Complete all demo vdo | Running on Colab A100,, T4, L4 GPU | 
