@@ -2,114 +2,213 @@
 # Assignment 1 - Evaluation Presentation
 # Topic: K-pop MerchAI
 
+**Repository:** https://github.com/artittayaforwork-pro/K-pop-MerchAI
 **Created by:** Artittaya Klairung 
+
 
 
 ## 1. Project Introduction
 
 This project is demonstrate an assumption of k-pop industry  will choose an AI system of its comeback-mechandise pipeline. Which two candidate systems serve the same business (which I chosen a similar system of my project follow assignment requirement case). 
 
-Each system has four models and one per AI tasks. Therefore, everytask is direcyly comparable model pair. Consequently, the is a business workflow:
-**Trend -> Design -> Pricing -> Moderation**
+Each system has four models and one per AI tasks. Therefore, everytask is direcyly comparable model pair. 
 
-| # | AI task | System A — Lean Standard Stack (Focused on local' overview) | System B — Specialised Global Stack (Focused on Global overview) | Baseline | Lecture link |
+
+## 2. System comparison 
+
+**Workflow:** Trend -> Design -> Pricing -> Moderation
+
+What is the different between 2 systems
+- **System A** prioritises widely adopted, smaller and cheaper models.
+- **System B** prioritises multilingual robustness and models suited to heterophilous data.
+
+> For baseline system, I included it due to compare baseline model with complex model performance, resulting in a question if baseline can work similar to complex model or not?
+
+| Notebook No. | AI task | System A: Standard System Overview | System B: Global System Overview | Baseline | COMP8410 linked knowledge |
 |---|---|---|---|---|---|
-| 01 | Trend analysis | CLIP ViT-L/14 | SigLIP 2 So400m | naive "last period's best sellers" | W5 CLIP, W2 attention maps |
-| 02 | Design generation | FLUX.1-schnell | Stable Diffusion 3.5 Medium | SD 1.5 + StyleAligned | W10 flow matching, W2–3 StyleAligned |
-| 03 | Global pricing | GAT | FAGCN | MLP without the graph | W11 GNNs under heterophily |
-| 04 | Comment moderation | Llama Guard 3 1B | ShieldGemma 2B | keyword filter | Assignment requirement 2.1: LLMs, AI safety |
+| 1 | Trend analysis | CLIP ViT-L/14 | SigLIP 2 So400m | naive forecast (last period's top items) | Week 2, 3, 5 - CLIP, attention / saliency |
+| 2 | Design generation | Lumina-Image-2.0 (flow matching) | Stable Diffusion XL Base 1.0 (diffusion) | SD 1.5 + StyleAligned | Week 2, 3, 10 - flow matching vs diffusion, StyleAligned |
+| 3 | Global pricing | GAT | FAGCN | MLP (no graph) | W11 GNNs under heterophily |
+| 4 | Comment moderation | Granite Guardian 3.1 2B | Qwen3Guard-Gen 4B | keyword filter | NLP & LLMs; AI safety, fairness and privacy which follow assignment requirement 2.1 that student able to use past unit in this coursework. For NLP and LLMs, I have completed this study from COMP8420 Advanced Natural Language Processing which teach by professor Longbing Cao|
+
+
+Additionally, All models are open and download from Hugging Face **without an access token**.
 
 
 
-## 2. System Explanation
-
-**System A** will prioritize speed, low cost, and widely adopted models while **System B** will focus on robustness for a internation fan base (multiculturalism) for heterophilous data, at a higher compute cost. Consequently, Notebook 5 will decides whether **System A** or **System B** provide mostly benefit and justify cost. Then I can use knowledge from COMP8410 Advanced Topic in Artificial Intelligence with business oveview to analyze the best system.
-
-## Project structure
+## 3. Project structure
 
 ```
-comeback-merch-ai/
-├── README.md
-├── requirements.txt
+K-pop MerchAI/
+├── .history   # in my local laptop
+├── .gitattributes
 ├── .gitignore
-├── AI_USE_DECLARATION.md
-├── FILE_MIGRATION_MAP.md          # where every file of the earlier prototype went
-├── notebooks/
-│   ├── 00_Setup.ipynb             # packages, GPU, HF token, model access, folders
-│   ├── 01_Trend_Analysis.ipynb
-│   ├── 02_Design_Generation.ipynb
-│   ├── 03_Global_Pricing.ipynb
-│   ├── 04_Comment_Moderation.ipynb
-│   └── 05_System_Evaluation.ipynb # thresholds, weighted scores, sensitivity, recommendation
-├── data/                          # created by the notebooks, not committed
-│   ├── raw/                       # downloads and the CSV you add by hand
-│   └── processed/                 # cleaned tables and generated images
-└── results/                       # committed: the evidence for the report
-    ├── figures/                   # PNG charts and sample image sheets
-    ├── tables/                    # per-item outputs, run logs, scorecard, recommendation
-    └── metrics/                   # <task>__<system>.json, read by notebook 05
+├── Design concept.md
+├── GPU_Colab_Check.ipynb # for fist check GPU as I mainly use Google Colab Extention for execution due to local GPU restriction
+├── README.md     # Introduction brieft of this project
+├── ENV_SETUP.ipynb                 # GPU check, shared settings, model access check, dataset preparation -> which I need to do this section to ensure that all setup will ready for next stage of execution in 4 pair models
+├── My_worklog.md                   # Tracking work process and checklist for myself
+├── Notebooks/
+│   ├── 1_Trend_Analysis.ipynb
+│   ├── 2_Design_Generation.ipynb
+│   ├── 3_Global_Pricing.ipynb
+│   └── 4_Comment_Moderation.ipynb
+├── Datasets/                       
+│   └── KOLD_Korean Offensive Language Dataset  # contain a raw data in json file and I cleaned through Notebook 4 
+│   └── KPop Online Merchandise Prices          # contain a raw data and cleaned data as CSV file which cleaned data file name is kpop_online_merch_price_clean.csv
+└── Results/
+    ├── 1_Trend_Analysis_Results.zip
+    ├── 2_Design_Generate_Results.zip                 
+    ├── 3_Global_Pricing_Results.zip                   
+    └── 4_Comment_Moderation_Results.zip                    
 ```
 
+**All the notebook** will have exactly same set-up initially and helper function for the reason of keep same set-up quality
 
+## 4. How to execution all the notebook
 
+> For this project, I used **Google Colab Extention - Colab Pro (paid product)** as GPU computing unit and **Google Drive** as Memory unit. Due to I faced laptop crashed and do not have enough computing unit with memory unit recently.
 
+The notebooks were developed in **VS Code with the Google Colab extension (with GPU - T4, L4, and A100)**.
 
+1. Open the notebook in VS Code - User can choose whether run on Colab or Local GPU
+  - If you run through Google Colab, you must need to install Colab Extention first. Then you can connect through **Select Kernel (Select Kernel -> Google Colab -> GPU -> Choose GPU type -> Use up-to-date GPU version -> Waiting Execution -> Choose computer language (python))**
+2. Run `ENV_SETUP.ipynb` once to check the GPU, the shared settings and model access.
+3. Run the notebooks **in order (1 → 4)**: **Run All**
+  - For data upload, if you use local execution, you can copy path local easily. While you use google colab extention, you need to upload dataset to google colab content firsy by right click on dataset file and choose **Upload to Colab**
+4. Each notebook saves its results to `Results/` and, at the end, zips them to Google Drive (`MyDrive/Kpop_MerchAI/...`). Download and unzip the archive into `Results/`, because Colab files are deleted when the session ends.
 
-------------------------------------------------------------------- DOUBLE CHECK AGAIN--------------------------------------------------------------------------------------------------
-
-## 3. Coding Process (VS Code and using GPU extention in Google Colab)
-
-For this project, I have used **Google Colab Pro (personal purchase)** to run this project due to GPU limitation in my local laptop. Furthermore, I will use different GPU for specific task to reduce run time process and efficient with faster results. 
-
-| Notebook | GPU | Data | Notes |
+| Notebook | GPU used | Data needed | Approx. run time |
 |---|---|---|---|
-| ENV_SETUP | optional | — | run first; checks everything |
-| 01 Trend | yes (4–6 GB) | Amazon Reviews 2023, downloaded automatically (several GB, once) | images with a face are removed |
-| 02 Design | yes (12–16 GB) | 50 synthetic briefs | slowest notebook; fill in the rating rubric afterwards |
-| 03 Pricing | no | K-pop price CSV | quickest end-to-end test (`USE_SYNTHETIC = True` for a dry run) |
-| 04 Moderation | yes (6–8 GB) | BEEP! (automatic), KOLD (optional), synthetic | |
-| 05 Evaluation | no | `results/metrics/` | produces the scorecard, figure and Markdown tables |
+| 1 Trend Analysis | L4 & A100 | Amazon Reviews 2023 (downloaded automatically) | depends on download size |
+| 2 Design Generation | A100 recommended | concept briefs (in `Datasets/`) | slowest notebook |
+| 3 Global Pricing | T4 & L4 | `all_shops.csv` (manual upload) | a few minutes |
+| 4 Comment Moderation | L4 | BEEP! (automatic), `kold_data.json` (manual upload), synthetic data (customised by myself in three different languages) | about 10 minutes |
 
-Measure and report your own run times: they depend on the GPU.
+**Settings:**
+- `QUICK = True` runs a smaller sample. The submitted results use this setting because of the compute budget; set `QUICK = False` for a full run.
+
+**Cost:** GPU cost is estimated from Colab compute units (US$9.99 per 100 units; T4 1.19, L4 1.71, A100 5.40 units per hour). The GPU type is detected automatically. Sources are listed in `ENV_SETUP.ipynb`.
 
 
-## 4. Datasets (all public; nothing is committed)
+## 5. Datasets Import
 
-| Dataset | Notebook | Access | Terms |
+| Dataset | Used in | How to get it | Notes |
 |---|---|---|---|
-| [Amazon Reviews 2023](https://amazon-reviews-2023.github.io) (Hou et al., 2024) | 01 | direct download, no token | research use; cite the paper |
-| [KPop Online Merchandise Prices](https://www.kaggle.com/datasets/ericwan1/kpop-merchandise-prices) | 03 | manual download from Kaggle | check the licence on the dataset page |
-| [BEEP!](https://github.com/kocohub/korean-hate-speech) (Moon et al., 2020) | 04 | GitHub, automatic | Creative Commons (dataset card) |
-| [KOLD](https://aclanthology.org/2022.emnlp-main.744) (Jeong et al., 2022), optional | 04 | ACL Anthology zip | see the files |
-| Synthetic briefs and comments (fictional group NOVA9) | 02, 04 | generated from a fixed seed in the notebook | created for this project |
+| [Amazon Reviews 2023](https://amazon-reviews-2023.github.io) (Hou et al., 2024) | 1 | downloaded automatically by the notebook | K-pop merchandise items and reviews; images with a detected face are removed |
+| Comeback concept briefs | 2 | included in `Datasets/` | written by the author for a fictional group; no real artists, logos or album art |
+| [KPop Online Merchandise Prices](https://www.kaggle.com/datasets/ericwan1/kpop-merchandise-prices) (Kaggle) | 3 | download `all_shops.csv` from Kaggle and upload when asked | 13,438 products, 2,187 artists, 6 stores |
+| [BEEP!](https://github.com/kocohub/korean-hate-speech) (Moon et al., 2020) | 4 | downloaded automatically (dev split) | Korean entertainment-news comments, human labels |
+| [KOLD](https://aclanthology.org/2022.emnlp-main.744) (Jeong et al., 2022) | 4 | download `kold_data.json` and upload when asked | Korean offensive-language dataset |
+| Synthetic comments | 4 | generated in the notebook from a fixed seed | Korean, Thai and English; praise, complaints and attacks; no real names |
 
-## 5. Decision framework (notebook 05)
 
-1. **Go / no-go thresholds:** trend forecast must beat the naive forecast; design must reach the SD 1.5 baseline
-   CLIPScore and be commercially licensable without an enterprise deal; pricing must beat the MLP; moderation may
-   remove at most 5 % of benign comments.
-2. **Weighted score** inside each pair: technical 40 %, business 30 %, governance 30 %, each metric scaled to the
-   best model in the pair. Cost-focused and safety-focused weightings test whether the winner is stable.
-3. **System level:** one system winning every task is adopted; otherwise a hybrid of the winners. Scores within
-   5 % of each other go to the cheaper model.
 
-## Known limitations (state them in the report)
+## 6. Implementation statement (per model pair)
 
-- Notebooks 01, 02 and 04 need GPU model weights and could not be executed where this code was prepared; their
-  logic and check cells were tested on CPU with stand-in data. Expect small fixes on your machine.
-- Amazon labels come from product titles and are noisy; review counts are a proxy for sales; data ends Sep 2023.
-- The K-pop price data is a snapshot of prices, not sales; the artist column may be inferred from product names.
-- Llama Guard and ShieldGemma were designed for chatbot prompts, so fan comments are a domain shift.
-- FLUX.1-schnell with 4-bit quantisation and CPU offload may differ slightly in quality from full precision.
+### Pair 1: Trend Analysis (CLIP vs SigLIP 2)
+- **Task:** zero-shot tagging of product images by colour and product type, then detection of rising items.
+- **Method:** 
+  - the tags feed a rolling-origin backtest, measured with precision@3 against a naive forecast. 
+  - Colour labels are also tested in Korean and Thai, and occlusion saliency maps show which image regions drive each prediction.
+- **Metrics:**
+  - technical: tag macro-F1, precision@3
+  - business: latency, cost, GPU memory
+  - governance: multilingual gap
+- **Outputs:** 1_Trend_Analysis_Results.zip. Furthermore, the result of this notebook will contribute to work with Notebook 2 of image generation
 
-## Push to GitHub (when the project is complete)
+### Pair 2: Design Generation (Lumina-Image-2.0 vs SDXL)
+- **Task:** generate merchandise artwork from concept briefs.
+- **Method:** each brief is a set of five products that should share one style. All three systems receive the same briefs, negative prompt and seed. A step sweep (1–30 steps) shows the speed and quality trade-off. Additionally, fictional k-pop concept was created by myself to avoid rights.
+- **Metrics:**
+  - technical: CLIPScore (prompt alignment), style consistency (mean pairwise CLIP image similarity)
+  - business: seconds per image, cost, GPU memory
+  - governance: commercial licence
+- **Outputs:** 2_Design_Generate_Results.zip
 
-```bash
-git init
-git add .
-git commit -m "Comeback Merch AI: evaluation notebooks and results"
-git branch -M main
-git remote add origin https://github.com/<you>/comeback-merch-ai.git
-git push -u origin main
-```
-Clear large notebook outputs before committing if the files get big (figures are already saved in `results/figures/`).
+### Pair 3: Global Pricing (GAT vs FAGCN)
+- **Task:** classify each product into a budget, mid or premium price tier (tertiles of price in USD).
+- **Method:** products are nodes with text, category, region and artist features, linked by same-artist and same-category graphs. Edge homophily is measured first. All three models are trained on two graphs with 5 seeds each (30 runs) and early stopping on validation macro-F1.
+- **Metrics:**
+  - technical: macro-F1 (mean ± std)
+  - business: training time
+  - governance: region F1 gap (US vs KR stores)
+- **Outputs:** 3_Global_Pricing_Results.zip
+
+### Pair 4: Comment Moderation (Granite Guardian vs Qwen3Guard)
+- **Task:** decide whether each launch-day comment should be kept or removed.
+- **Method:** each system gives a harm score from 0 to 1, read from the probability of the model's answer token, and a comment is removed at a score ≥ 0.5. A threshold sweep tests stricter settings.
+- **Metrics:**
+  - technical: F1, precision, recall, AUPRC
+  - business: latency, cost per 1,000 comments, GPU memory
+  - governance:
+    - share of safe comments removed (limit 5%)
+    - share of complaints removed
+    - F1 gap across languages
+- **Privacy:** emails, URLs and @handles are removed before any comment is shown or saved.
+- **Outputs:** 4_Comment_Moderation_Results.zip
+
+
+## 7. Outputs after execution completed
+
+| Task | Main metric | Baseline | System A | System B | Better |
+|---|---|---|---|---|---|
+| 1 Trend | tag macro-F1 | – | 0.376 | 0.477 | B |
+| 1 Trend | precision@3 (naive = 0.333) | 0.333 | 0.250 | 0.333 | neither beats naive |
+| 1 Trend | multilingual gap (lower = fairer) | – | 0.415 | 0.171 | B |
+| 2 Design | CLIPScore | 0.687 | 0.729 | 0.738 | B |
+| 2 Design | seconds per image | 0.85 | 20.8 | 7.6 | B |
+| 3 Pricing | macro-F1, artist graph (homophily 0.38) | 0.775 | 0.493 | 0.775 | B (ties MLP) |
+| 4 Moderation | F1 | 0.226 | 0.576 | 0.739 | B |
+| 4 Moderation | complaints wrongly removed | 6.7% | 30.0% | 0.0% | B |
+| 4 Moderation | safe comments removed (limit 5%) | 3.1% | 15.4% | 14.2% | neither A nor B passes at 0.5 |
+
+All figures come from the JSON files in `Results/metrics/`. Interpretation, user feedback and recommendations are in the report.
+
+
+## 8. Guardrail of copyrights in this project
+
+### Responsible use
+- No real artist's likeness is generated or processed. Generated content uses a fictional group, and Amazon images with a face are removed.
+- The synthetic moderation comments use member roles and customize name (e.g. "the leader"), not names.
+- Comments are shown and saved without emails, URLs or user handles.
+- No tokens or keys are needed, and none are stored in the code or outputs.
+- Course lecture slides and class notebooks are not included in this repository.
+
+
+
+## References
+- Hou, Y., Li, J., He, Z., Yan, A., Chen, X., & McAuley, J. (2024). *Bridging Language and Items for Retrieval and Recommendation*. arXiv:2403.03952. [Amazon Reviews'23](https://amazon-reviews-2023.github.io)
+- Hanteo News. (2025, January 16). *2024 K-pop trend report*. https://www.hanteonews.com/en/article/74681
+- Korea Creative Content Agency. (2025). *2025 global trends in K-pop consumption*. https://welcon.kocca.kr/cmm/fms/FileDown.do?atchFileId=FILE_ba6300f2-5443-42ed-b5ab-339adeeaec96&fileSn=1&preview=Y
+- Shin, S., & Park, J. (2018). On-chart success dynamics of popular songs. *Advances in Complex Systems, 21*(03n04), 1850008. https://doi.org/10.1142/S021952591850008X
+- Weverse Company. (2025, January 23). *Weverse issues global fandom trend report, offering new insights on superfan business*. https://en.weverse.co/news/?bmode=view&idx=165565023
+- Hyndman, R. J., & Athanasopoulos, G. (2021). *Forecasting: Principles and practice* (3rd ed.). OTexts. https://otexts.com/fpp3/
+- Barocas, S., Hardt, M., & Narayanan, A. (2023). *Fairness and machine learning: Limitations and opportunities*. MIT Press. https://fairmlbook.org
+- Hyndman, R. J., & Athanasopoulos, G. (2021). *Forecasting: Principles and practice* (3rd ed.). OTexts. https://otexts.com/fpp3/
+- Luccioni, S., Jernite, Y., & Strubell, E. (2024). Power hungry processing: Watts driving the cost of AI deployment? *Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT '24)*. https://arxiv.org/abs/2311.16863
+- Opitz, J. (2024). A closer look at classification evaluation metrics and a critical reflection of common evaluation practice. *Transactions of the Association for Computational Linguistics, 12*, 820–836. https://aclanthology.org/2024.tacl-1.46
+- Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., & Sutskever, I. (2021). Learning transferable visual models from natural language supervision. *Proceedings of the 38th International Conference on Machine Learning*, 8748–8763.
+- Tschannen, M., Gritsenko, A., Wang, X., Naeem, M. F., Alabdulmohsin, I., Parthasarathy, N., Evans, T., Beyer, L., Xia, Y., Mustafa, B., Hénaff, O., Harmsen, J., Steiner, A., & Zhai, X. (2025). *SigLIP 2: Multilingual vision-language encoders with improved semantic understanding, localization, and dense features*. arXiv:2502.14786. https://arxiv.org/abs/2502.14786
+- Hertz, A., Voynov, A., Fruchter, S., & Cohen-Or, D. (2024). Style aligned image generation via shared attention. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*. https://multisearch.mq.edu.au/permalink/61MACQUARIE_INST/1gnm2jp/cdi_ieee_primary_10657939
+- Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T., Müller, J., Penna, J., & Rombach, R. (2023). SDXL: Improving latent diffusion models for high-resolution image synthesis. *International Conference on Learning Representations (ICLR)*. https://multisearch.mq.edu.au/permalink/61MACQUARIE_INST/1gnm2jp/cdi_arxiv_primary_2307_01952
+- Qin, Q., et al. (2025). *Lumina-Image 2.0: A unified and efficient image generative framework*. arXiv. https://multisearch.mq.edu.au/permalink/61MACQUARIE_INST/1gnm2jp/cdi_ieee_primary_11444580
+- Alpha-VLLM. (2025). *Lumina-Image-2.0* [Model]. Hugging Face. https://huggingface.co/Alpha-VLLM/Lumina-Image-2.0
+- Stability AI. (2023). *Stable Diffusion XL Base 1.0* [Model]. Hugging Face. https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+- Wan (2022). *KPop Online Merchandise Prices* [Dataset], a public Kaggle dataset and No token is needed - https://www.kaggle.com/datasets/ericwan1/kpop-merchandise-prices
+- Bo, D., Wang, X., Shi, C., & Shen, H. (2021). Beyond low-frequency information in graph convolutional networks. *Proceedings of the AAAI Conference on Artificial Intelligence, 35*(5), 3950–3957. https://multisearch.mq.edu.au/permalink/61MACQUARIE_INST/1gnm2jp/cdi_crossref_citationtrail_10_1609_aaai_v35i5_16514
+- Zhu, J., Yan, Y., Zhao, L., Heimann, M., Akoglu, L., & Koutra, D. (2020). Beyond homophily in graph neural networks: Current limitations and effective designs. *Advances in Neural Information Processing Systems (NeurIPS), 33*, 7793–7804. https://multisearch.mq.edu.au/permalink/61MACQUARIE_INST/1gnm2jp/cdi_arxiv_primary_2006_11468
+- Jeong, Y., Oh, J., Lee, J., Ahn, J., Moon, J., Park, S., & Oh, A. (2022). KOLD: Korean Offensive Language Dataset. *Proceedings of EMNLP 2022*, 10818–10833. https://aclanthology.org/2022.emnlp-main.744
+- Moon, J., Cho, W. I., & Lee, J. (2020). BEEP! Korean corpus of online news comments for toxic speech detection. *Proceedings of the Eighth International Workshop on Natural Language Processing for Social Media*, 25–31. https://aclanthology.org/2020.socialnlp-1.4
+- Padhi, I., et al. (2024). Granite Guardian. *arXiv:2412.07724*. Model card: https://huggingface.co/ibm-granite/granite-guardian-3.1-2b
+- Qwen Team (2025). Qwen3Guard technical report. Model card: https://huggingface.co/Qwen/Qwen3Guard-Gen-4B\
+- J K. (2020, July 7). *Insiders question the effectiveness of disabling comments on entertainment news; "Sulli Act" reportedly no longer in talks*. Soompi. https://www.soompi.com/article/1411495wpp/insiders-question-the-effectiveness-of-disabling-comments-on-entertainment-news-sulli-act-reportedly-no-longer-in-talks
+- Lee, J.-G. (2020, July 7). *Nate entertainment news comments end... Entertainment comments disappear from the three major portals*. Asia Economy. https://www.asiae.co.kr/en/article/2020070708070421262
+- sl278838. (2020, February 19). *Naver to discontinue comments on entertainment articles and related keyword searches*. allkpop. https://www.allkpop.com/article/2020/02/naver-to-discontinue-comments-on-entertainment-articles-and-related-keyword-searches
+- AKP Staff. (2025, November 6). K-pop ‘Idol Union’ set to launch this year, aiming to protect artists’ labor rights and mental health. allkpop. https://www.allkpop.com/article/2025/11/k-pop-idol-union-set-to-launch-this-year-aiming-to-protect-artists-labor-rights-and-mental-health
+- Asia Economy. (2025, December 30). K-pop agencies take firm action against malicious commenters and stalkers targeting artists. https://www.asiae.co.kr/en/article/2025123016135779398
+- Kim, J.-H. (2025, March 12). Academics call for societal shift in attitudes toward K-pop singers’ mental health. The Korea Herald. https://www.koreaherald.com/article/10440102
+- Lee, J.-J. (2026, January 22). K-pop agencies fight malicious comments — why it’s not enough. The Korea Herald. https://www.koreaherald.com/article/10661023
+- De La Cruz, B. (2023, December 6). Toxic beauty standards of Korean idols. Medium. https://medium.com/@bdelacruz1_2747/toxic-beauty-standards-of-korean-idols-5bdcf5e4ab83
+- Sasaeng fan. (n.d.). In Wikipedia. Retrieved November 5, 2026, from https://en.wikipedia.org/wiki/Sasaeng_fan
+- Vo, P. (2022, October 14). Young Kpop idols under extreme amounts of stress. The Nexus. https://wvnexus.org/opinions/young-kpop-idols-under-extreme-amounts-of-stress/
