@@ -11,3 +11,4 @@
 | 5 Nov 2026 | Notebook 3 - Global Pricing | U Setup Environment , specialize function, design dictionary of each languages until complete final result in conclusion & Live demo | Running on Colab L4 GPU | 
 | 6 Nov 2026 | Notebook 4 - Comment Moderation | U Setup Environment , specialize function, design dictionary of each languages until complete final result in conclusion & Live demo | Running on Colab L4 GPU | 
 | 6 Nov 2026 | Demo VDO | Complete all demo vdo | Running on Colab A100,, T4, L4 GPU | 
+| 8 Nov 2026 | Report, Powerpoint, and VDO submission | Complete all | Working on Canva mainly due to no local space | 
