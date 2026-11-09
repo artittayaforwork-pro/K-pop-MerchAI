@@ -1,0 +1,11 @@
+# datasets (large; downloaded again by the notebooks)
+Datasets/
+results/
+
+# secrets and environment
+.env
+kaggle.json
+.venv/
+.history/
+.ipynb_checkpoints/
+__pycache__/

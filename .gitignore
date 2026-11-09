@@ -2,6 +2,5 @@
 .env
 kaggle.json
 .venv/
-.history/
 .ipynb_checkpoints/
 __pycache__/

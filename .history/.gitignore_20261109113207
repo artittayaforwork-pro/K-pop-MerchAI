@@ -1,0 +1,6 @@
+# secrets and environment
+.env
+kaggle.json
+.venv/
+.ipynb_checkpoints/
+__pycache__/
